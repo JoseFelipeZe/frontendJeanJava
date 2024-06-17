@@ -1,7 +1,6 @@
-// src/components/Sale.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import './Sale.css';
 
 function Sale() {
   const [sales, setSales] = useState([]);
@@ -58,10 +57,10 @@ function Sale() {
   };
 
   return (
-    <div>
-      <h1>Sales</h1>
-      <form onSubmit={handleSubmit}>
-        <select name="clientId" value={formData.clientId} onChange={handleChange}>
+    <div className="sale-container">
+      <h1 className="title">Sales</h1>
+      <form onSubmit={handleSubmit} className="sale-form">
+        <select name="clientId" value={formData.clientId} onChange={handleChange} className="form-input">
           <option value="">Select Client</option>
           {clients.map((client) => (
             <option key={client.id} value={client.id}>
@@ -75,15 +74,16 @@ function Sale() {
           placeholder="Products"
           value={formData.products}
           onChange={handleChange}
+          className="form-input"
         />
-        <button type="submit">{editSaleId ? 'Update' : 'Add'}</button>
+        <button type="submit" className="submit-button">{editSaleId ? 'Update' : 'Add'}</button>
       </form>
-      <ul>
+      <ul className="sale-list">
         {sales.map((sale) => (
-          <li key={sale.id}>
+          <li key={sale.id} className="sale-item">
             {sale.client.name} - {sale.products}
-            <button onClick={() => handleEdit(sale)}>Edit</button>
-            <button onClick={() => handleDelete(sale.id)}>Delete</button>
+            <button onClick={() => handleEdit(sale)} className="edit-button">Edit</button>
+            <button onClick={() => handleDelete(sale.id)} className="delete-button">Delete</button>
           </li>
         ))}
       </ul>

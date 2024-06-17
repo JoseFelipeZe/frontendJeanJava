@@ -1,6 +1,6 @@
-// src/components/Client.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Client.css';
 
 function Client() {
   const [clients, setClients] = useState([]);
@@ -43,15 +43,16 @@ function Client() {
   };
 
   return (
-    <div>
-      <h1>Clients</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="client-container">
+      <h1 className="title">Clients</h1>
+      <form onSubmit={handleSubmit} className="client-form">
         <input
           type="text"
           name="name"
           placeholder="Name"
           value={formData.name}
           onChange={handleChange}
+          className="form-input"
         />
         <input
           type="text"
@@ -59,15 +60,18 @@ function Client() {
           placeholder="Phone"
           value={formData.phone}
           onChange={handleChange}
+          className="form-input"
         />
-        <button type="submit">{editClientId ? 'Update' : 'Add'}</button>
+        <button type="submit" className="submit-button">
+          {editClientId ? 'Update' : 'Add'}
+        </button>
       </form>
-      <ul>
+      <ul className="client-list">
         {clients.map((client) => (
-          <li key={client.id}>
+          <li key={client.id} className="client-item">
             {client.name} - {client.phone}
-            <button onClick={() => handleEdit(client)}>Edit</button>
-            <button onClick={() => handleDelete(client.id)}>Delete</button>
+            <button onClick={() => handleEdit(client)} className="edit-button">Edit</button>
+            <button onClick={() => handleDelete(client.id)} className="delete-button">Delete</button>
           </li>
         ))}
       </ul>
