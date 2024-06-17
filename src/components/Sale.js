@@ -58,10 +58,10 @@ function Sale() {
 
   return (
     <div className="sale-container">
-      <h1 className="title">Sales</h1>
+      <h1 className="title">Vendas</h1>
       <form onSubmit={handleSubmit} className="sale-form">
         <select name="clientId" value={formData.clientId} onChange={handleChange} className="form-input">
-          <option value="">Select Client</option>
+          <option value="">Selecione o Cliente</option>
           {clients.map((client) => (
             <option key={client.id} value={client.id}>
               {client.name}
@@ -71,19 +71,19 @@ function Sale() {
         <input
           type="text"
           name="products"
-          placeholder="Products"
+          placeholder="Produtos"
           value={formData.products}
           onChange={handleChange}
           className="form-input"
         />
-        <button type="submit" className="submit-button">{editSaleId ? 'Update' : 'Add'}</button>
+        <button type="submit" className="submit-button">{editSaleId ? 'Atualizar' : 'Adicionar'}</button>
       </form>
       <ul className="sale-list">
         {sales.map((sale) => (
           <li key={sale.id} className="sale-item">
             {sale.client.name} - {sale.products}
-            <button onClick={() => handleEdit(sale)} className="edit-button">Edit</button>
-            <button onClick={() => handleDelete(sale.id)} className="delete-button">Delete</button>
+            <button onClick={() => handleEdit(sale)} className="edit-button">Editar</button>
+            <button onClick={() => handleDelete(sale.id)} className="delete-button">Deletar</button>
           </li>
         ))}
       </ul>

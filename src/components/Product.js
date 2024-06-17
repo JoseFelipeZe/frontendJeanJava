@@ -44,12 +44,12 @@ function Product() {
 
   return (
     <div className="product-container">
-      <h1 className="title">Products</h1>
+      <h1 className="title">Produtos</h1>
       <form onSubmit={handleSubmit} className="product-form">
         <input
           type="text"
           name="description"
-          placeholder="Description"
+          placeholder="Nome do Produto"
           value={formData.description}
           onChange={handleChange}
           className="form-input"
@@ -57,7 +57,7 @@ function Product() {
         <input
           type="number"
           name="cost"
-          placeholder="Cost"
+          placeholder="Custo"
           value={formData.cost}
           onChange={handleChange}
           className="form-input"
@@ -65,19 +65,19 @@ function Product() {
         <input
           type="number"
           name="value"
-          placeholder="Value"
+          placeholder="Quantidade"
           value={formData.value}
           onChange={handleChange}
           className="form-input"
         />
-        <button type="submit" className="submit-button">{editProductId ? 'Update' : 'Add'}</button>
+        <button type="submit" className="submit-button">{editProductId ? 'Atualizar' : 'Adicionar'}</button>
       </form>
       <ul className="product-list">
         {products.map((product) => (
           <li key={product.id} className="product-item">
             {product.description} - {product.cost} - {product.value}
-            <button onClick={() => handleEdit(product)} className="edit-button">Edit</button>
-            <button onClick={() => handleDelete(product.id)} className="delete-button">Delete</button>
+            <button onClick={() => handleEdit(product)} className="edit-button">Editar</button>
+            <button onClick={() => handleDelete(product.id)} className="delete-button">Deletar</button>
           </li>
         ))}
       </ul>

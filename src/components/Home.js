@@ -5,12 +5,12 @@ import './Home.css';
 function Home() {
   return (
     <div className="home-container">
-      <h1 className="title">Home Page</h1>
+      <h1 className="title">Sistema de Estoque</h1>
       <nav className="nav">
         <ul className="nav-list">
-          <li className="nav-item"><Link to="/clients" className="nav-link">Clients</Link></li>
-          <li className="nav-item"><Link to="/products" className="nav-link">Products</Link></li>
-          <li className="nav-item"><Link to="/sales" className="nav-link">Sales</Link></li>
+          <li className="nav-item"><Link to="/clients" className="nav-link">Clientes</Link></li>
+          <li className="nav-item"><Link to="/products" className="nav-link">Produtos</Link></li>
+          <li className="nav-item"><Link to="/sales" className="nav-link">Vendas</Link></li>
         </ul>
       </nav>
     </div>

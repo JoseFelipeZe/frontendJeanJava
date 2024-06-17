@@ -44,12 +44,12 @@ function Client() {
 
   return (
     <div className="client-container">
-      <h1 className="title">Clients</h1>
+      <h1 className="title">Clientes</h1>
       <form onSubmit={handleSubmit} className="client-form">
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Nome"
           value={formData.name}
           onChange={handleChange}
           className="form-input"
@@ -57,21 +57,21 @@ function Client() {
         <input
           type="text"
           name="phone"
-          placeholder="Phone"
+          placeholder="Telefone"
           value={formData.phone}
           onChange={handleChange}
           className="form-input"
         />
         <button type="submit" className="submit-button">
-          {editClientId ? 'Update' : 'Add'}
+          {editClientId ? 'Atualizar' : 'Adicionar'}
         </button>
       </form>
       <ul className="client-list">
         {clients.map((client) => (
           <li key={client.id} className="client-item">
             {client.name} - {client.phone}
-            <button onClick={() => handleEdit(client)} className="edit-button">Edit</button>
-            <button onClick={() => handleDelete(client.id)} className="delete-button">Delete</button>
+            <button onClick={() => handleEdit(client)} className="edit-button">Editar</button>
+            <button onClick={() => handleDelete(client.id)} className="delete-button">Deletar</button>
           </li>
         ))}
       </ul>
