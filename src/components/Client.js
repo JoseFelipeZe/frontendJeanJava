@@ -4,7 +4,7 @@ import './Client.css';
 
 function Client() {
   const [clients, setClients] = useState([]);
-  const [formData, setFormData] = useState({ name: '', phone: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '' , id:''});
   const [editClientId, setEditClientId] = useState(null);
 
   useEffect(() => {
@@ -23,22 +23,23 @@ function Client() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editClientId) {
-      await axios.put(`http://localhost:8080/Client/${editClientId}`, formData);
-    } else {
-      await axios.post('http://localhost:8080/Client', formData);
+      await axios.put(`http://localhost:8080/Client`, formData);
     }
+
     setFormData({ name: '', phone: '' });
     setEditClientId(null);
     fetchClients();
   };
 
   const handleEdit = (client) => {
-    setFormData({ name: client.name, phone: client.phone });
+    setFormData({ name: client.name, phone: client.phone, id:client.id });
     setEditClientId(client.id);
   };
 
   const handleDelete = async (id) => {
+  
     await axios.delete(`http://localhost:8080/Client/${id}`);
+    console.log(id)
     fetchClients();
   };
 
@@ -71,7 +72,7 @@ function Client() {
           <li key={client.id} className="client-item">
             {client.name} - {client.phone}
             <button onClick={() => handleEdit(client)} className="edit-button">Editar</button>
-            <button onClick={() => handleDelete(client.id)} className="delete-button">Deletar</button>
+            <button onClick={() => handleDelete(parseInt(client.id))} className="delete-button">Deletar</button>
           </li>
         ))}
       </ul>
