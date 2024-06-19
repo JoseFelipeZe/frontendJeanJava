@@ -22,9 +22,8 @@ function Client() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editClientId) {
-      await axios.put(`http://localhost:8080/Client`, formData);
-    }
+    await axios.post(`http://localhost:8080/Client`, formData);
+    
 
     setFormData({ name: '', phone: '' });
     setEditClientId(null);
@@ -36,10 +35,9 @@ function Client() {
     setEditClientId(client.id);
   };
 
-  const handleDelete = async (id) => {
-  
-    await axios.delete(`http://localhost:8080/Client/${id}`);
-    console.log(id)
+  const handleDelete = async (client) => {
+    console.log(client)
+    await axios.post(`http://localhost:8080/Client/delete`, client);
     fetchClients();
   };
 
@@ -72,7 +70,7 @@ function Client() {
           <li key={client.id} className="client-item">
             {client.name} - {client.phone}
             <button onClick={() => handleEdit(client)} className="edit-button">Editar</button>
-            <button onClick={() => handleDelete(parseInt(client.id))} className="delete-button">Deletar</button>
+            <button onClick={() => handleDelete(client)} className="delete-button">Deletar</button>
           </li>
         ))}
       </ul>
