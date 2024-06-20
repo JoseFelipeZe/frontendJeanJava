@@ -6,7 +6,7 @@ function Sale() {
   const [sales, setSales] = useState([]);
   const [clients, setClients] = useState([]);
   const [products, setProducts] = useState([]);
-  const [formData, setFormData] = useState({ clientId: '', products: '' });
+  const [formData, setFormData] = useState({ ClientName: '', product: '', quantidade:''});
   const [editSaleId, setEditSaleId] = useState(null);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function Sale() {
 
   const fetchProducts = async () => {
     const response = await axios.get('http://localhost:8080/Product');
+    console.log(products.data)
     setProducts(response.data);
   };
 
@@ -36,12 +37,11 @@ function Sale() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editSaleId) {
-      await axios.put(`http://localhost:8080/Sale/${editSaleId}`, formData);
-    } else {
-      await axios.post('http://localhost:8080/Sale', formData);
-    }
-    setFormData({ clientId: '', products: '' });
+    console.log(formData)
+   
+    await axios.post('http://localhost:8080/Sale', formData);
+    
+    setFormData({ClientName: '', product: '', quantidade: ''});
     setEditSaleId(null);
     fetchSales();
   };
@@ -60,19 +60,27 @@ function Sale() {
     <div className="sale-container">
       <h1 className="title">Vendas</h1>
       <form onSubmit={handleSubmit} className="sale-form">
-        <select name="clientId" value={formData.clientId} onChange={handleChange} className="form-input">
+        <select name="ClientName" value={formData.ClientName} onChange={handleChange} className="form-input">
           <option value="">Selecione o Cliente</option>
           {clients.map((client) => (
-            <option key={client.id} value={client.id}>
+            <option key={client.id} value={client.ClientName}>
               {client.name}
+            </option>
+          ))}
+        </select>
+        <select name="product" value={formData.product} onChange={handleChange} className="form-input">
+          <option value="">Selecione o produto</option>
+          {products.map((product) => (
+            <option key={product.description} value={product.description}>
+              {product.description}
             </option>
           ))}
         </select>
         <input
           type="text"
-          name="products"
+          name="quantidade"
           placeholder="Produtos"
-          value={formData.products}
+          value={formData.quantidade}
           onChange={handleChange}
           className="form-input"
         />
@@ -81,7 +89,7 @@ function Sale() {
       <ul className="sale-list">
         {sales.map((sale) => (
           <li key={sale.id} className="sale-item">
-            {sale.client.name} - {sale.products}
+            {sale.ClientName} - {sale.product}
             <button onClick={() => handleEdit(sale)} className="edit-button">Editar</button>
             <button onClick={() => handleDelete(sale.id)} className="delete-button">Deletar</button>
           </li>
