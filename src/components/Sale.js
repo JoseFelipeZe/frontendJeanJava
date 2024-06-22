@@ -51,8 +51,9 @@ function Sale() {
     setEditSaleId(sale.id);
   };
 
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:8080/Sale/${id}`);
+  const handleDelete = async (sale) => {
+    console.log(sale)
+    await axios.delete(`http://localhost:8080/Sale/delete`, sale );
     fetchSales();
   };
 
@@ -89,9 +90,8 @@ function Sale() {
       <ul className="sale-list">
         {sales.map((sale) => (
           <li key={sale.id} className="sale-item">
-            {sale.ClientName} - {sale.product}
-            <button onClick={() => handleEdit(sale)} className="edit-button">Editar</button>
-            <button onClick={() => handleDelete(sale.id)} className="delete-button">Deletar</button>
+            {sale.product} - {sale.quantidade}
+
           </li>
         ))}
       </ul>

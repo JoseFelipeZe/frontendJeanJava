@@ -40,7 +40,7 @@ function Product() {
   
 
   const handleDelete = async (product) => {
- 
+    console.log(product)
     await axios.post(`http://localhost:8080/Product/delete`, product);
     fetchProducts();
   };
